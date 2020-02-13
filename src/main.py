@@ -38,7 +38,7 @@ def trigger_video2():
 if GPIO:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(config.TRIGGER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.add_event_detect(onfig.TRIGGER_PIN, GPIO.FALLING, callback=trigger_video2, bouncetime=50)
+    GPIO.add_event_detect(config.TRIGGER_PIN, GPIO.FALLING, callback=trigger_video2, bouncetime=50)
 
 def main():
     vlc.connect()
