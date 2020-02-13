@@ -1,6 +1,6 @@
-PLAYLIST_PATH = "/home/pi/rpi-vlc-player/res/playlist.m3u"
+VIDEOS = ['res/video2.mov', 'res/video1.mov', ]
 
 VIDEO2_DURATION = 5.5
 
 # Pins (BCM numeration!)
-TRIGGER_PIN = 17    
+TRIGGER_PIN = 17
