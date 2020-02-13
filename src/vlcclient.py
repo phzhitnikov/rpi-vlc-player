@@ -161,7 +161,7 @@ class VLCClient(object):
     def play_item(self, id):
         """Play item with id"""
         # FIXME: behaves weirdly, id seems random
-        return self._send_command(f"goto {id}")
+        return self._send_command("goto {0}".format(id))
 
     def pause(self):
         """Pause playing"""
