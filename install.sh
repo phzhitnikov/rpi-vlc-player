@@ -11,7 +11,7 @@ AddToAutostart() {
 PLAYER_BASE_PATH="/home/pi/rpi-vlc-player"
 
 # Install dependencies
-sudo apt-get update
+sudo apt update
 sudo apt install vlc python3 -y
 
 # Configure startup script
