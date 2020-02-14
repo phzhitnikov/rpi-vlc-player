@@ -10,9 +10,9 @@ chmod +x install.sh
 ./install.sh
 ```
 - Copy your 2 video files to `res` folder
-- Add relative video paths to `src/config.py`:
+- Add video file names to `src/config.py`:
 ```
-VIDEOS = ['res/video2.mov', 'res/video1.mov']
+VIDEOS = ['video1.avi', 'video2.avi']
 ```
 - Configure VIDEO2_DURATION in `src/config.py` 
 ```
