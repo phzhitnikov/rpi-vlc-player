@@ -13,18 +13,18 @@ from vlc import PlaybackMode
 import config
 
 instance = vlc.Instance([
-"--no-osd",
-"--fullscreen",
-"--video-on-top",
-"--no-video-title-show",
-"--no-embedded-video",
-"--no-disable-screensaver",
-"--video-wallpaper"]
+    "--no-osd",
+    "--fullscreen",
+    "--video-on-top",
+    "--no-video-title-show",
+    "--no-embedded-video",
+    "--no-disable-screensaver",
+    "--video-wallpaper"])
 
-p=instance.media_list_player_new()
+p = instance.media_list_player_new()
 # p.set_fullscreen(True)
 
-timer=Timer(config.VIDEO2_DURATION, None)
+timer = Timer(config.VIDEO2_DURATION, None)
 
 
 def play_video1(*args):
@@ -46,7 +46,7 @@ def play_video2(*args):
     p.play_item_at_index(1)
     p.set_playback_mode(PlaybackMode.loop)
 
-    timer=Timer(config.VIDEO2_DURATION, play_video1)
+    timer = Timer(config.VIDEO2_DURATION, play_video1)
     timer.start()
 
 
@@ -58,7 +58,7 @@ if GPIO:
 
 
 def main():
-    MediaList=instance.media_list_new(config.VIDEOS)
+    MediaList = instance.media_list_new(config.VIDEOS)
     p.set_media_list(MediaList)
 
     # Play video1 looped
