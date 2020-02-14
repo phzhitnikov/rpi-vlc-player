@@ -58,7 +58,8 @@ if GPIO:
 
 
 def main():
-    MediaList = instance.media_list_new(config.VIDEOS)
+    VIDEOS = ["{0}/{1}".format(config.RES_PATH, v) for v in config.VIDEOS]
+    MediaList = instance.media_list_new(VIDEOS)
     p.set_media_list(MediaList)
 
     # Play video1 looped
