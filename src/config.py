@@ -1,4 +1,5 @@
-VIDEOS = ['res/video1.avi', 'res/video2.avi']
+RES_PATH = "/home/pi/rpi-vlc-player/res"
+VIDEOS = ['video1.avi', 'video2.avi']
 
 VIDEO2_DURATION = 26
 
