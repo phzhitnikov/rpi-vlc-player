@@ -1,6 +1,6 @@
-VIDEOS = ['res/video2.mov', 'res/video1.mov', ]
+VIDEOS = ['res/video1.avi', 'res/video2.avi']
 
-VIDEO2_DURATION = 5.5
+VIDEO2_DURATION = 26
 
 # Pins (BCM numeration!)
 TRIGGER_PIN = 17
