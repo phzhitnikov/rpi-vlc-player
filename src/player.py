@@ -58,7 +58,7 @@ class Player():
         end_pos = float(end_pos) / 100
 
         def on_pos_change(event):
-            logging.debug(f"Fragment pos: {event.u.new_position}")
+            logging.debug("Fragment pos: {0}".format(event.u.new_position))
             if event.u.new_position >= end_pos:
                 if end_callback:
                     logging.debug("play_fragment: Firing end_callback")

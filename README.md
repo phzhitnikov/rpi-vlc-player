@@ -11,7 +11,7 @@ git clone https://github.com/phzhitnikov/rpi-vlc-player.git
 
 ```
 chmod +x INSTALL.sh
-./INSTALL.sh
+sudo ./INSTALL.sh
 ```
 
 3. Copy your concatenated video to `res/` folder
