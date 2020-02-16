@@ -10,6 +10,7 @@ git clone https://github.com/phzhitnikov/rpi-vlc-player.git
 2. Run `INSTALL.sh`:
 
 ```
+cd rpi-vlc-player
 chmod +x INSTALL.sh
 sudo ./INSTALL.sh
 ```
