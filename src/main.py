@@ -1,5 +1,11 @@
+import logging
+import os
 from time import sleep
-from threading import Timer
+
+import vlc
+
+import config
+from player import Player
 
 try:
     import RPi.GPIO as GPIO
@@ -7,47 +13,27 @@ except ModuleNotFoundError:
     print("No GPIO module. You're running on the rpi or not?")
     GPIO = None
 
-import vlc
-from vlc import PlaybackMode
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+logging.basicConfig(level=logging.DEBUG)
 
-import config
-
-instance = vlc.Instance([
-    "--no-osd",
-    "--fullscreen",
-    "--video-on-top",
-    "--no-video-title-show",
-    "--no-embedded-video",
-    "--no-disable-screensaver",
-    "--video-wallpaper"])
-
-p = instance.media_list_player_new()
-# p.set_fullscreen(True)
-
-timer = Timer(config.VIDEO2_DURATION, None)
+player = Player([config.VIDEO_PATH], config.VLC_ARGS)
 
 
 def play_video1(*args):
-    print("play_video1")
-
-    p.play_item_at_index(0)
-    p.set_playback_mode(PlaybackMode.repeat)
+    logging.info("play_video1")
+    player.loop_fragment(*config.VIDEO1_POS)
 
 
 def play_video2(*args):
-    global timer
+    logging.info("play_video2")
 
-    # Ignore trigger if timer did not end
-    if timer.is_alive():
+    # If 2nd fragment is already playing, return
+    if player.is_fragment_pos_set(*config.VIDEO2_POS):
+        logging.debug("Already playing video2, ignoring")
         return
 
-    print("play_video2")
-
-    p.play_item_at_index(1)
-    p.set_playback_mode(PlaybackMode.loop)
-
-    timer = Timer(config.VIDEO2_DURATION, play_video1)
-    timer.start()
+    # Return to video1
+    player.play_fragment(*config.VIDEO2_POS, play_video1)
 
 
 # Init GPIO
@@ -58,20 +44,16 @@ if GPIO:
 
 
 def main():
-    VIDEOS = ["{0}/{1}".format(config.RES_PATH, v) for v in config.VIDEOS]
-    MediaList = instance.media_list_new(VIDEOS)
-    p.set_media_list(MediaList)
-
-    # Play video1 looped
-    p.play_item_at_index(0)
-    p.set_playback_mode(PlaybackMode.repeat)
+    player.set_loop()   # Important!
+    play_video1()
 
     while True:
         try:
             sleep(0.01)
 
         except KeyboardInterrupt:
-            p.stop()
+            # play_video2()
+            player.stop()
             return
 
 
