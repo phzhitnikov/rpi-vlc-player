@@ -21,12 +21,15 @@ sudo ./INSTALL.sh
 VIDEO_PATH = "res/output.mp4"
 ```
 
-5. Configure seeking positions `VIDEO1_POS` & `VIDEO2_POS` (value from 0 to 100) in `src/config.py`.
-   Try to avoid end_pos=100 due to freezing issues on loop restart
+5. Configure seeking positions `VIDEO1_POS` & `VIDEO2_POS` (float value from 0 to 100) in `src/config.py`.
+
+   Try to avoid end_pos=100 due to freezing issues on loop restart.
+
+   Don't overlap video positions.
 
 ```
 VIDEO1_POS = (0, 50)
-VIDEO2_POS = (50, 95)
+VIDEO2_POS = (51, 95)
 ```
 
 6. Configure `TRIGGER_PIN` in `src/config.py`. Attention: BCM numeration, more info: http://pinout.xyz
@@ -51,3 +54,7 @@ file video2.mp4
 ```
 ffmpeg -f concat -i file_list.txt -c copy output.mp4
 ```
+
+# Possible issues
+
+- If video doesn't play on RPi due to `moov atom not found` error, repair your mp4 videos with [untrunc tool](https://github.com/ponchio/untrunc)
