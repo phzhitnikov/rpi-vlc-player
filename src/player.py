@@ -48,13 +48,14 @@ class Player():
 
         return False
 
-    def play_fragment(self, start_pos, end_pos, end_callback=None):
-        logging.debug("play_fragment")
-        self.set_position(start_pos)
+    def play_fragment(self, start_pos, end_pos, end_callback=None, end_callback_args=[]):
+        logging.debug("play_fragment {}-{}".format(start_pos, end_pos))
 
         # FIXME: if playback_mode is not "loop", on MediaPlayerEndReached vlc can't restart playback
-        self.play()
+        if not self.player.get_state() == vlc.State.Playing:
+            self.play()
 
+        self.set_position(start_pos)
         end_pos = float(end_pos) / 100
 
         def on_pos_change(event):
@@ -62,21 +63,22 @@ class Player():
             if event.u.new_position >= end_pos:
                 if end_callback:
                     logging.debug("play_fragment: Firing end_callback")
-                    end_callback(event)
+                    end_callback(event, *end_callback_args)
                 else:
                     logging.debug("play_fragment: stopping playback")
                     self.player.stop()
 
         self._detach_events()
         self.add_event_callback(vlc.EventType.MediaPlayerPositionChanged, on_pos_change)
-        self.add_event_callback(vlc.EventType.MediaPlayerEndReached, end_callback)
+        # self.add_event_callback(vlc.EventType.MediaPlayerEndReached, end_callback, *end_callback_args)
 
     def loop_fragment(self, start_pos, end_pos):
-        def on_fragment_end(event):
-            logging.debug("Fragment ended. Restart")
-            self.player.set_position(start_pos)
+        def on_fragment_end(event, start_pos, *args):
+            logging.debug(f"Fragment ended. Restarting at pos {start_pos}")
+            self.set_position(start_pos)
 
-        self.play_fragment(start_pos, end_pos, on_fragment_end)
+        logging.debug("loop_fragment {}-{}".format(start_pos, end_pos))
+        self.play_fragment(start_pos, end_pos, on_fragment_end, [start_pos, end_pos])
 
     def _detach_events(self):
         self.event_manager.event_detach(vlc.EventType.MediaPlayerPositionChanged)
