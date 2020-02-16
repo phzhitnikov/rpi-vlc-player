@@ -49,7 +49,7 @@ class Player():
         return False
 
     def play_fragment(self, start_pos, end_pos, end_callback=None, end_callback_args=[]):
-        logging.debug("play_fragment {}-{}".format(start_pos, end_pos))
+        logging.debug("play_fragment <{} - {}>".format(start_pos, end_pos))
 
         # FIXME: if playback_mode is not "loop", on MediaPlayerEndReached vlc can't restart playback
         if not self.player.get_state() == vlc.State.Playing:
@@ -74,10 +74,10 @@ class Player():
 
     def loop_fragment(self, start_pos, end_pos):
         def on_fragment_end(event, start_pos, *args):
-            logging.debug(f"Fragment ended. Restarting at pos {start_pos}")
+            logging.debug("Fragment ended. Restarting at pos <{0}>".format(start_pos))
             self.set_position(start_pos)
 
-        logging.debug("loop_fragment {}-{}".format(start_pos, end_pos))
+        logging.debug("loop_fragment <{} - {}>".format(start_pos, end_pos))
         self.play_fragment(start_pos, end_pos, on_fragment_end, [start_pos, end_pos])
 
     def _detach_events(self):
