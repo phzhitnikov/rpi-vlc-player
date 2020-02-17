@@ -18,5 +18,5 @@ sudo apt install python3 -y
 pip3 install python-vlc
 
 # Configure startup
-AddToAutostart "export DISPLAY=:0"
-AddToAutostart "python3 $PLAYER_BASE_PATH/src/main.py &"
+AddToAutostart "export DISPLAY=:0.0"
+AddToAutostart "/usr/bin/python3 $PLAYER_BASE_PATH/src/main.py &"
