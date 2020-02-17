@@ -4,7 +4,8 @@
 
 ```
 cd /home/pi
-git clone https://github.com/phzhitnikov/rpi-vlc-player.git
+wget https://github.com/phzhitnikov/rpi-vlc-player/archive/master.zip
+unzip master
 ```
 
 2. Run `INSTALL.sh`:
@@ -59,27 +60,3 @@ ffmpeg -f concat -i file_list.txt -c copy output.mp4
 # Possible issues
 
 - If video doesn't play on RPi due to `moov atom not found` error, repair your mp4 videos with [untrunc tool](https://github.com/ponchio/untrunc)
-
-## Untrunc tool usage:
-
-1. To build `untrunc` run in console:
-
-```
-wget https://github.com/libav/libav/archive/v12.3.zip
-wget https://github.com/ponchio/untrunc/archive/master.zip
-unzip master.zip
-unzip v12.3.zip -d untrunc-master
-
-cd untrunc-master/libav-12.3/
-./configure
-make
-cd ..
-
-g++ -o untrunc -I./libav-12.3 file.cpp main.cpp track.cpp atom.cpp mp4.cpp -L./libav-12.3/libavformat -lavformat -L./libav-12.3/libavcodec -lavcodec -L./libav-12.3/libavresample -lavresample -L./libav-12.3/libavutil -lavutil -lpthread -lz
-```
-
-2. To repair mp4 file run:
-
-```
-./untrunc /path/to/working-video.m4v /path/to/broken-video.m4v
-```
