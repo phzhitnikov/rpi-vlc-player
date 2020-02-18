@@ -23,7 +23,7 @@ WORK_MODE = MODE_TRIGGER
 # Try to avoid end_pos=100 due to freezing issues on loop restart
 # Don't overlap video positions
 VIDEO1_POS = (0, 50)
-VIDEO2_POS = (51, 100)
+VIDEO2_POS = (51, 95)
 
 TRANSITION_PERIOD = 15
 

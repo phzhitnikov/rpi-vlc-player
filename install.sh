@@ -9,7 +9,8 @@ AddToAutostart() {
 }
 
 PLAYER_BASE_PATH="/home/pi/rpi-vlc-player"
-PACKAGES="python3 python3-pip python3-venv vlc"
+PACKAGES="python3 python3-pip python3-venv python3-rpi.gpio vlc"
+PYTHON_PACKAGES="python-vlc RPi.GPIO"
 
 # Install dependencies
 sudo apt update
@@ -19,10 +20,9 @@ sudo apt install $PACKAGES -y
 
 echo "*** Creating python venv. This may take a while"
 python3 -m venv env
-source env/bin/activate
 
 echo "*** Installing python packages"
-pip3 install python-vlc
+sudo env/bin/pip install $PYTHON_PACKAGES
 
 echo "*** Adding start.sh script to autostart"
 chmod +x start.sh
