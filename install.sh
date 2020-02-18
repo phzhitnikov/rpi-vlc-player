@@ -22,8 +22,8 @@ python3 -m venv env
 source env/bin/activate
 
 echo "*** Installing python packages"
-pip install python-vlc
+pip3 install python-vlc
 
 echo "*** Adding start.sh script to autostart"
 chmod +x start.sh
-AddToAutostart "$PLAYER_BASE_PATH/start.sh"
+AddToAutostart ".$PLAYER_BASE_PATH/start.sh"
