@@ -26,4 +26,5 @@ echo "*** Installing python packages"
 pip install python-vlc
 
 echo "*** Adding START.SH script to autostart"
+chmod +x START.SH
 AddToAutostart "$PLAYER_BASE_PATH/START.SH"
