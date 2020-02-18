@@ -8,12 +8,12 @@ wget https://github.com/phzhitnikov/rpi-vlc-player/archive/master.zip
 unzip master
 ```
 
-2. Run `INSTALL.sh`:
+2. Run `install.sh`:
 
 ```
 cd rpi-vlc-player
-chmod +x INSTALL.sh
-sudo ./INSTALL.sh
+chmod +x install.sh
+sudo ./install.sh
 ```
 
 3. Copy your concatenated video to `res/` folder
