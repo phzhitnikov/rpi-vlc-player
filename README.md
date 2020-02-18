@@ -40,6 +40,18 @@ VIDEO2_POS = (51, 95)
 TRIGGER_PIN = 17
 ```
 
+7. Select `WORK_MODE` in `src/config.py`
+
+```
+WORK_MODE = MODE_TRIGGER
+```
+
+OR
+
+```
+WORK_MODE = MODE_TIMER
+```
+
 # Video creation
 
 To concatenate multiple mp4 videos into one using `ffmpeg` tool:

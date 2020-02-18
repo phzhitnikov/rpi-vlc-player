@@ -27,8 +27,9 @@ def play_video1(*args):
     logging.info("play_video1")
     player.loop_fragment(*config.VIDEO1_POS)
 
-    timer = Timer(config.TRANSITION_PERIOD, schedule_video2)
-    timer.start()
+    if config.WORK_MODE == config.MODE_TIMER:
+        timer = Timer(config.TRANSITION_PERIOD, schedule_video2)
+        timer.start()
 
 
 def play_video2(*args):
@@ -58,10 +59,10 @@ def schedule_video2(*args):
 
 
 # Init GPIO
-if GPIO:
+if GPIO and config.WORK_MODE == config.MODE_TRIGGER:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(config.TRIGGER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.add_event_detect(config.TRIGGER_PIN, GPIO.FALLING, callback=schedule_video2, bouncetime=50)
+    GPIO.add_event_detect(config.TRIGGER_PIN, GPIO.FALLING, callback=schedule_video2, bouncetime=100)
 
 
 def main():
