@@ -1,6 +1,7 @@
 import logging
 import os
 from time import sleep
+from threading import Timer
 
 import vlc
 
@@ -18,11 +19,16 @@ logging.basicConfig(level=config.LOG_LEVEL)
 player = Player([config.VIDEO_PATH], config.VLC_ARGS)
 player.set_loop()   # Important, don't delete!
 
+timer = Timer(config.TRANSITION_PERIOD, None)
+
 
 def play_video1(*args):
     """ Play looped video1 """
     logging.info("play_video1")
     player.loop_fragment(*config.VIDEO1_POS)
+
+    timer = Timer(config.TRANSITION_PERIOD, schedule_video2)
+    timer.start()
 
 
 def play_video2(*args):

@@ -19,5 +19,7 @@ VIDEO_PATH = "../res/output.mp4"
 VIDEO1_POS = (0, 50)
 VIDEO2_POS = (51, 100)
 
+TRANSITION_PERIOD = 15
+
 # Pins (BCM numeration!)
 TRIGGER_PIN = 17
