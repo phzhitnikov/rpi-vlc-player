@@ -1,3 +1,5 @@
+#!/bin/bash
+
 AddToAutostart() {
 	# Check if already added to autostart
 	if ! grep -xqFe "$1" /etc/rc.local
