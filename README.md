@@ -4,8 +4,7 @@
 
 ```
 cd /home/pi
-wget https://github.com/phzhitnikov/rpi-vlc-player/archive/master.zip
-unzip master
+git clone https://github.com/phzhitnikov/rpi-vlc-player.git
 ```
 
 2. Run `install.sh`:
