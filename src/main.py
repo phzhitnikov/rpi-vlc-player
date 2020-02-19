@@ -49,7 +49,7 @@ def schedule_video2(*args):
 
     # If 2nd fragment is already playing, return
     if player.is_fragment_pos_set(*config.VIDEO2_POS):
-        logging.info("Already playing video2, ignoring trigger")
+        logging.debug("Already playing video2, ignoring trigger")
         return
 
     logging.info("Scheduled transition to video2")
@@ -62,10 +62,11 @@ def schedule_video2(*args):
 if GPIO and config.WORK_MODE == config.MODE_TRIGGER:
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(config.TRIGGER_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.add_event_detect(config.TRIGGER_PIN, GPIO.FALLING, callback=schedule_video2, bouncetime=100)
+    GPIO.add_event_detect(config.TRIGGER_PIN, GPIO.RISING, callback=schedule_video2, bouncetime=300)
 
 
 def main():
+    sleep(1)
     play_video1()
 
     while True:
