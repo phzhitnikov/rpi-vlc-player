@@ -1,9 +1,12 @@
 # Installation
 
+**Tested with Raspbian Lite**
+
 1. Clone this repo to `/home/pi`:
 
 ```
 cd /home/pi
+sudo apt install git
 git clone https://github.com/phzhitnikov/rpi-vlc-player.git
 ```
 
